@@ -46,9 +46,9 @@ router.post('/', async (request, response) => {
       tagIds: [1, 2, 3, 4]
     }
   */
-  let productTagData;
-  try {
-    const productData = await Product.create(request.body);
+  Product.create(request.body)
+  .then((product) => {
+    console.log("product:", product);
     // if there's product tags, we need to create pairings to bulk create in the ProductTag model
     if (request.body.tagIds.length) {
       const productTagIdArr = request.body.tagIds.map((tag_id) => {
@@ -57,15 +57,49 @@ router.post('/', async (request, response) => {
           tag_id,
         };
       });
-      return productTagData = await ProductTag.bulkCreate(productTagIdArr);
+      console.log("product ARRAY:", productTagIdArr);
+      return ProductTag.bulkCreate(productTagIdArr);
     }
     // if no product tags, just respond
-    response.status(200).json(productData);
+    response.status(200).json(product);
+  })
+  .then((productTagIds) => {
+    console.log("product Tag ids:", productTagIds);
+    response.status(200).json(productTagIds)
+  })
 
-    response.status(200).json(productTagData)
-  } catch (error) {
-    response.status(400).json(error);
-  } 
+  .catch((err) => {
+    console.log(err);
+    response.status(400).json(err);
+  });
+  // let productTagData;
+  // try {
+  //   const productData = await Product.create(request.body);
+  //   console.log("request body:", request.body);
+  //   console.log("productData:", productData);
+  //   // If there's product tags, we need to create pairings to bulk create in the ProductTag model
+  //   console.log("length of request body", request.body.tagIds.length)
+  //   if (request.body.tagIds.length) {
+  //     console.log("If statement entered");
+  //     console.log("tag ids:", request.body.tagIds);
+  //     const productTagIdArr = request.body.tagIds.map((tag_id) => {
+  //       console.log("tag array", productTagIdArr);
+  //       return {
+  //         product_id: product.id,
+  //         tag_id,
+  //       };
+  //     });
+ 
+  //     console.log("product tag array:", productTagIdArr);
+  //     productTagData = await ProductTag.bulkCreate(productTagIdArr);
+  //   }
+  //   // Responds with the product data and if there is product tag data, it will also respond with that
+  //   response.status(200).json(productData);
+
+  //   response.status(200).json(productTagData)
+  // } catch (error) {
+  //   response.status(400).json(error);
+  // } 
 });
 
 // update product
