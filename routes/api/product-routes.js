@@ -76,7 +76,7 @@ router.post('/', async (request, response) => {
 router.put('/:id', async (request, response) => {
   try {
     // Update product data
-    const productData = await Product.update(request.body, {
+    await Product.update(request.body, {
       where: {
         id: request.params.id,
       },
