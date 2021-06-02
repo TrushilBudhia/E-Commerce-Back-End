@@ -19,11 +19,11 @@ The application uses the dotenv, express, mysql2, nodemon and sequelize package 
 8. [Questions](#questions)
 
 ## Installation
-1. To install this project clone it through GitHub using the following code in the terminal: 
+1. To install this application clone it through GitHub using the following code in the terminal: 
     ``` 
     git clone https://github.com/TrushilBudhia/E-Commerce-Back-End.git
     ```
-2. To add the dependencies to the project, navigate to the root directory for the project and run:
+2. To add the dependencies to the application, navigate to the root directory for the application and run:
     ```js
     npm install
     ```
@@ -40,9 +40,9 @@ npm start
 ```
 
 ## Assets
-The link to a guide video that demonstrates the applications functionality: 
+The link to a guide video that demonstrates the applications functionality: [Guide Video](https://www.youtube.com/watch?v=WXGqVYS2hd8)
 
-The following images shows the functionality of the application:
+The following images shows the functionality of the application: 
 
 ![E-Commerce Back End screenshot of GET all Categories.](./assets/images/E-Commerce-Back-End-Preview-1.jpg)
 
@@ -56,6 +56,7 @@ The following images shows the functionality of the application:
 - [mysql2](https://www.npmjs.com/package/mysql2)
 - [Nodemon](https://www.npmjs.com/package/nodemon)
 - [Sequelize](https://sequelize.org/v5/index.html)
+- [Insomnia](https://insomnia.rest/)
 - JavaScript
 
 ## License
