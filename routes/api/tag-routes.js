@@ -4,8 +4,8 @@ const { Tag, Product, ProductTag } = require('../../models');
 // The `/api/tags` endpoint
 
 router.get('/', async (request, response) => {
-  // find all tags
-  // be sure to include its associated Product data
+  // Finding all tags
+  // The Product model associated data is also included
   try {
     const tagData = await Tag.findAll({
       include: [{ model: Product }],
@@ -17,13 +17,14 @@ router.get('/', async (request, response) => {
 });
 
 router.get('/:id', async (request, response) => {
-  // find a single tag by its `id`
-  // be sure to include its associated Product data
+  // Finds a single tag by its `id`
+  // The Product model associated data is also included
   try {
     const tagData = await Tag.findByPk(request.params.id, {
       include: [{ model: Product }],
     });
 
+    // If no tagData, a 404 error status is returned along with a message
     if(!tagData) {
       response.status(404).json({ message: 'No tag found with that id!' });
       return;
@@ -35,48 +36,50 @@ router.get('/:id', async (request, response) => {
 });
 
 router.post('/', async (request, response) => {
-  // create a new tag
+  // Creates a new tag
   try {
-    const tagData = await Tag.create(request.body);
-    response.status(200).json(tagData);
+    await Tag.create(request.body);
+    response.status(200).json({ message: `The tag '${request.body.tag_name}' has been added` });
   } catch (error) {
     response.status(400).json(error);
   }
 });
 
 router.put('/:id', async (request, response) => {
-  // update a tag's name by its `id` value
+  // Updates a tag's name by its `id` value
   try {
     const tagData = await Tag.update(request.body, {
       where: {
         id: request.params.id,
       },
     });
+
+    // If no tagData, a 404 error status is returned along with a message
     if (!tagData[0]) {
       response.status(404).json({ message: 'No tag with this id!' });
       return;
     }
-    response.status(200).json(tagData);
+    response.status(200).json({ message: `Updated Tag id #${request.params.id}` });
   } catch (error) {
     response.status(500).json(error);
   }
 });
 
 router.delete('/:id', async (request, response) => {
-  // delete on tag by its `id` value
+  // Deletes a tag by its `id` value
   try {
     const tagData = await Tag.destroy({
       where: {
         id: request.params.id,
       },
     });
-
+    // If no tagData, a 404 error status is returned along with a message
     if (!tagData) {
       res.status(404).json({ message: 'No tag found with that id!' });
       return;
     }
-
-    response.status(200).json(tagData);
+    
+    response.status(200).json({ message: `Tag id #${request.params.id} has been removed` });
   } catch (error) {
     response.status(500).json(error);
   }
