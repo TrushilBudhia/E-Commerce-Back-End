@@ -67,7 +67,7 @@ This project is [MIT](./LICENSE) licensed
 ## Contributing
 Contributions, issues and feature requests are welcome.
 
-Feel free to check the [issues page](https://github.com/TrushilBudhia?tab=repositories/issues) if you want to contribute.
+Feel free to check the [issues page](https://github.com/TrushilBudhia/E-Commerce-Back-End/issues) if you want to contribute.
 
 ## Tests
 There are no tests currently for this application.
